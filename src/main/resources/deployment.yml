@@ -1,59 +1,62 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: pods
+  name: dops
   labels:
-    name: pods
+    name: dops
 spec:
   ports:
     - nodePort: 30163
-      port: 8080
+      port: 80
       targetPort: 8080
       protocol: TCP
   selector:
-    app: pods
+    app: dops
   type: NodePort
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pods
+  name: dops
 spec:
   selector:
     matchLabels:
-      app: pods
+      app: dops
   replicas: 2
   template:
     metadata:
       labels:
-        app: pods
+        app: dops
     spec:
       containers:
-        - name: pods
-          image: pods:latest
+        - name: dops
+          image: local/dops
+          imagePullPolicy: Never
           ports:
             - containerPort: 8080
-          env:   # Setting Enviornmental Variables
-            - name: DB_HOST   # Setting Database host address from configMap
+          env:   # env variables
+            - name: DB_HOST   # configMap
               valueFrom:
                 configMapKeyRef:
-                  name: postgres-conf  # name of configMap
+                  name: postgres-conf  # configMap
                   key: host
-            - name: DB_NAME  # Setting Database name from configMap
+            - name: DB_NAME  # configMap
               valueFrom:
                 configMapKeyRef:
                   name: postgres-conf
                   key: name
-            - name: POSTGRES_USER  # Setting Database username from Secret
+            - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: postgres-credentials # Secret Name
+                  name: postgres-credentials # secret
                   key: postgres_user
-            - name: POSTGRES_PASSWORD # Setting Database password from Secret
+            - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-credentials
                   key: postgres_password
+
+
 
 
