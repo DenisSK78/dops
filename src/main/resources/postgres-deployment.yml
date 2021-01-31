@@ -1,5 +1,4 @@
 ---
-# Define a 'Service' To Expose postgres to Other Services
 apiVersion: v1
 kind: Service
 metadata:
@@ -16,7 +15,6 @@ spec:
   clusterIP: None
 
 ---
-# Define a 'Persistent Voulume Claim'(PVC) for Postgress Storage, dynamically provisioned by cluster
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -41,14 +39,14 @@ metadata:
     tier: database
 
 spec:
-  selector: # mysql Pod Should contain same labels
+  selector:
     matchLabels:
       app: postgres
   strategy:
     type: Recreate
   template:
     metadata:
-      labels: # Must match 'Service' and 'Deployment' selectors
+      labels:
         app: postgres
         tier: database
     spec:
@@ -67,7 +65,7 @@ spec:
                 secretKeyRef:
                   name: postgres-credentials
                   key: postgres_password
-            - name: POSTGRES_DB # Setting Database Name from a 'ConfigMap'
+            - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:
                   name: postgres-conf
