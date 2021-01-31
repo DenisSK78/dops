@@ -35,8 +35,6 @@ spec:
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
-        imagePullSecrets :
-          - name : $KUBERNETES_SECRET_NAME
           env:   # env variables
             - name: DB_HOST   # configMap
               valueFrom:
