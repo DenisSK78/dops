@@ -25,6 +25,7 @@ public class TextController {
             repository.save(new City("Сочи"));
             repository.save(new City("Минск"));
         }
+        all.forEach(System.out::println);
         return "Hello, World";
     }
 }

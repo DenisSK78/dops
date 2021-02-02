@@ -3,16 +3,14 @@ package com.dops.dops.dao;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 
-@ToString
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "city")
+@Table(name = "city", schema = "dops")
 public class City {
 
     @Id
@@ -23,5 +21,13 @@ public class City {
 
     public City(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

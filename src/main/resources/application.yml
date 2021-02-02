@@ -13,3 +13,6 @@ jpa:
   properties:
     hibernate:
       default_schema: dops
+
+server:
+  port: 8080
