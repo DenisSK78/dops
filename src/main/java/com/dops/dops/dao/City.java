@@ -16,8 +16,9 @@ import javax.persistence.*;
 public class City {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    Integer id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "city_column_1_seq")
+    @SequenceGenerator(name = "city_column_1_seq", sequenceName = "city_column_1_seq", allocationSize = 1)
+    Long id;
     String name;
 
     public City(String name) {

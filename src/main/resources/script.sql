@@ -1,6 +1,6 @@
-create schema if not exists dops ;
+create schema if not exists dops;
 
-create table if not exists city
+create table if not exists dops.city
 (
     id   bigserial not null
         constraint city_pk
@@ -8,5 +8,5 @@ create table if not exists city
     name varchar(100)
 );
 
-alter table city
+alter table dops.city
     owner to postgres;
