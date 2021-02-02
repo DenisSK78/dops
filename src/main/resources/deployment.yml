@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: dops
-          image: denis78/dops
+          image: denis78/dops:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
