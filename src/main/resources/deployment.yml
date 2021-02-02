@@ -31,8 +31,8 @@ spec:
     spec:
       containers:
         - name: dops
-          image: local/dops:latest
-          imagePullPolicy: Never
+          image: denis78/dops
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:   # env variables
