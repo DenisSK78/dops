@@ -33,7 +33,7 @@ spec:
         - name: dops
           image: local/dops:latest
           imagePullPolicy: Never
-        restartPolicy: Never
+      restartPolicy: Never
           ports:
             - containerPort: 8080
           env:   # env variables
