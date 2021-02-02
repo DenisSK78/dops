@@ -19,4 +19,8 @@ public class City {
     @GeneratedValue(strategy= GenerationType.AUTO)
     Integer id;
     String name;
+
+    public City(String name) {
+        this.name = name;
+    }
 }
