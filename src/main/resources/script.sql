@@ -10,3 +10,6 @@ create table if not exists dops.city
 
 alter table dops.city
     owner to postgres;
+
+create sequence if not exists
+    city_column_1_seq start with 1 increment by 1;
