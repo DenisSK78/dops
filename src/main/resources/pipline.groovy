@@ -19,7 +19,7 @@ pipeline {
         stage('Building image') {
             steps{
                 script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER" , "--network host ."
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
             }
         }
@@ -35,7 +35,7 @@ pipeline {
         stage('Apply kube') {
             steps {
                 withKubeConfig([credentialsId: 'project_config']) {
-                    sh 'kubectl apply -f src/main/resources/deployment.yml'
+                    sh 'cat src/main/resources/deployment.yml | sed "s/{{BUILD_NUMBER}}/$BUILD_NUMBER/g" | kubectl apply -f -'
                 }
             }
         }
