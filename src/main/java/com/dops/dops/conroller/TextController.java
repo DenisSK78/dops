@@ -40,7 +40,10 @@ public class TextController {
 
     @GetMapping("/city")
     public @ResponseBody String listCity(@RequestParam(value = "name", required = false) String name) {
-        if(name != null && !name.isEmpty()) repository.save(new City(name));
+        if(name != null && !name.isEmpty()) {
+            repository.save(new City(name));
+            logger.info("Add city.");
+        }
         List<City> all = repository.findAll();
         logger.info("Get all city.");
         return all.stream().map(e -> "<h3>" + e.toString() + "</h3>")
