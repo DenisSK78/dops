@@ -1,0 +1,13 @@
+
+rollback:
+    cat it-academy/project/dops/src/main/resources/deployment.yml | sed "s/{{BUILD_NUMBER}}/{...}/g" | kubectl apply -f -
+
+postgres pod:
+    psql -U postgres -d dops
+    select * from dops.city
+
+url:
+    all:     http://app.project.com/city
+    add:     http://app.project.com/city?name={...}
+    id:      http://app.project.com/city/{...}
+    delete:  http://app.project.com/city/{...}
